@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './modules/user/user.module';
-import { User } from './modules/user/user.entity';
+import { Booking } from './modules/bookings/booking.entity';
+import { BookingModule } from './modules/bookings/booking.module';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
@@ -20,11 +21,15 @@ import { User } from './modules/user/user.entity';
         password: configService.get('DB_PASS'),
         database: configService.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        entities: [User],
+        entities: [Booking],
+        migrationsRun: true,
+        migrations: [`${__dirname}/src/migrations/*.[tj]s`],
+        synchronize: true,
+        namingStrategy: new SnakeNamingStrategy(),
       }),
       inject: [ConfigService],
     }),
-    UserModule,
+    BookingModule,
   ],
 })
 export class AppModule {}

@@ -7,12 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-  const config = new DocumentBuilder()
-    .setTitle('Login Project')
-    .setDescription('Auth REST API')
-    .setVersion('1.0')
-    .addBearerAuth({ in: 'header', type: 'http' })
-    .build();
+  const config = new DocumentBuilder().setTitle('Car Rental').setDescription('REST API').setVersion('1.0').build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document, {
     swaggerOptions: {

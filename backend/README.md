@@ -1,6 +1,6 @@
 ## Description
 
-Rest API for user registration and login
+Backend для аренды автомобилей
 
 ## Installation
 
@@ -8,12 +8,12 @@ Rest API for user registration and login
 $ yarn install
 ```
 
-## Running the app
-First, you need to launch PostgreSQL server:
+## Запуск сервера
+Запустите базу данных в докере:
 ```bash
 $ docker-compose start
 ```
-Once this is done we can start our server:
+Если база данных готова к работе, то запустите сервер:
 ```bash
 # development
 $ yarn start
@@ -24,16 +24,22 @@ $ yarn start:dev
 # production mode
 $ yarn start:prod
 ```
-The server will be running on
+API будет доступен по ссылке:
 
 ```bash
-http://localhost:5000
+http://localhost:5000/api
 ```
 
-## Tests
-
+## API
+Проверить доступность авто на выбранные даты:
 ```bash
-# unit tests
-$ yarn test
+$ /booking/available
 ```
-
+Забронировать авто:
+```bash
+$ /booking/book
+```
+Получить отчет о бронировании за месяц:
+```bash
+$ /booking/report
+```
